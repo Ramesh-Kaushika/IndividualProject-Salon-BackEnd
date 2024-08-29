@@ -5,20 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Customer {
+public class Employee {
 
     @Id
-    private int customerId;
+    private int employeeID;
     @Column(nullable = false)
-    private String customerName;
+    private String employeeName;
     @Column(nullable = false)
-    private String gender;
+    private String position;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String phoneNumber;
     @Column(nullable = false)
-    private String role;
-    @Column(nullable = false)
-    private String password;
+    private double employeeSalary;
+
 }
