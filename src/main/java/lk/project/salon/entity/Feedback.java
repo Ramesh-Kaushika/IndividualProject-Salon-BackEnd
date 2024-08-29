@@ -8,7 +8,7 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int feedbackId;
     @Column(nullable = false)
-    int rating;
+    private int rating;
     @Column(nullable = false)
     private String comment;
     @Column(nullable = false)

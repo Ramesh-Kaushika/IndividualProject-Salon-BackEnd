@@ -14,5 +14,5 @@ public class Service {
     @Column(nullable = false)
     private float price;
     @Column(nullable = false)
-    private int duration;
+    private String duration;
 }
