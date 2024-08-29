@@ -1,14 +1,13 @@
 package lk.project.salon.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Employee {
 
     @Id
-    private int employeeID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int employeeId;
     @Column(nullable = false)
     private String employeeName;
     @Column(nullable = false)
