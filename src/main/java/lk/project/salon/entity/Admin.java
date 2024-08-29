@@ -1,7 +1,15 @@
 package lk.project.salon.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Admin {
     @Id
@@ -12,4 +20,15 @@ public class Admin {
     @Column(nullable = false)
     private String password;
 
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
