@@ -1,26 +1,35 @@
 package lk.project.salon.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.project.salon.dto.CustomerDto;
+import lk.project.salon.entity.Customer;
+import lk.project.salon.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/v1/customer")
+@RequestMapping("/api/v1/customer")
 public class CustomerController {
 
-    @GetMapping(path = "/text-1")
-    public String getMyText(){
-        String myText = "I m A Pro";
-        System.out.println(myText);
-        return myText;
+
+    private final CustomerService customerService;
+
+    @Autowired
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
-    @GetMapping("/text-2")
-    public String getMyText2(){
-        String myText = "I m A NOT Noob";
-        System.out.println(myText);
-        return myText;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> saveCustomer(@RequestBody CustomerDto customerDto) {
+        try {
+            Customer savedCustomer = customerService.saveCustomer(customerDto);
+            return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
 

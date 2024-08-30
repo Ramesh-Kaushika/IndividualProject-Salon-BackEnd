@@ -1,6 +1,5 @@
 package lk.project.salon.dto;
 
-
 import lombok.*;
 
 @NoArgsConstructor

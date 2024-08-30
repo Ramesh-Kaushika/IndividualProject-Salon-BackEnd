@@ -1,6 +1,5 @@
 package lk.project.salon.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 @Setter

@@ -20,14 +20,15 @@ public class Customer {
     private String customerName;
     @Column(nullable = false)
     private String gender;
-    @Column(nullable = false)
+    @Column(unique = true,nullable = false)
     private String email;
-    @Column(nullable = false)
+    @Column(unique = true,nullable = false)
     private String phoneNumber;
     @Column(nullable = false)
     private String role;
-    @Column(nullable = false)
+    @Column(unique = true,nullable = false)
     private String password;
+
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
