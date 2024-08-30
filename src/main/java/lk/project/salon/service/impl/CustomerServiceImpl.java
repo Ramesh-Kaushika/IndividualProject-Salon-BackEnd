@@ -30,7 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerRepo.findByPassword(customerDto.getPassword()).isPresent()) {
             throw new IllegalArgumentException("Password already exists!");
         }
-
         Customer customer = new Customer(
                 customerDto.getCustomerId(),
                 customerDto.getCustomerName(),
