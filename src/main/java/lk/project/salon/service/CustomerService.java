@@ -6,4 +6,6 @@ import lk.project.salon.entity.Customer;
 public interface CustomerService {
 
     public Customer saveCustomer(CustomerDto customerDto);
+
+    public Customer updateCustomer(Integer customerId,CustomerDto customerDto);
 }

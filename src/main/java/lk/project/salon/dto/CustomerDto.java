@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class CustomerDto {
 
-    private int customerId;
+    private Integer customerId;
     private String customerName;
     private String gender;
     private String email;
