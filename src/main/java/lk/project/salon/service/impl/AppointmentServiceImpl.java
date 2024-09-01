@@ -1,4 +1,6 @@
 package lk.project.salon.service.impl;
 
-public class AppointmentServiceImpl {
+import lk.project.salon.service.AppointmentService;
+
+public class AppointmentServiceImpl implements AppointmentService {
 }
