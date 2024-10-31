@@ -20,6 +20,11 @@ public class Admin {
     @Column(nullable = false)
     private String password;
 
+    public Admin(String adminName, String password) {
+        this.adminName = adminName;
+        this.password = password;
+    }
+
     public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
