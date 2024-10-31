@@ -13,8 +13,9 @@ public class AppointmentDto {
     private String date;
     private String time;
     private String status;
-    //select expert
-    //name
-    //gender
-    //phone
+    private String expert;
+    private String name;
+    private String gender;
+    private String phone;
+
 }

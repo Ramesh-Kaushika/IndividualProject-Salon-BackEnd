@@ -1,11 +1,9 @@
 package lk.project.salon.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+@Setter
 @Getter
 @ToString
 @AllArgsConstructor
@@ -22,20 +20,14 @@ public class Appointment {
     private String time;
     @Column(nullable = false)
     private String status;
+    @Column(nullable = false)
+    private String expert;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String gender;
+    @Column(nullable = false)
+    private String phone;
 
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
-    }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
