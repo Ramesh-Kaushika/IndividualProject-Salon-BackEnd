@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1/customer")
@@ -42,5 +44,13 @@ public class CustomerController {
         }
 
     }
+
+    @GetMapping
+    public ResponseEntity<Object> getAllCustomer(){
+        List<Customer> allCustomer = customerService.getAllCustomer();
+        return new ResponseEntity<>(allCustomer, HttpStatus.OK);
+    }
+
+
 }
 
