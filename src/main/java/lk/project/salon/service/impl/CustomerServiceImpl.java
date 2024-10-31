@@ -39,7 +39,6 @@ public class CustomerServiceImpl implements CustomerService {
                 customerDto.getGender(),
                 customerDto.getEmail(),
                 customerDto.getPhoneNumber(),
-                customerDto.getRole(),
                 customerDto.getPassword()
         );
         return customerRepo.save(customer);
@@ -77,7 +76,6 @@ public class CustomerServiceImpl implements CustomerService {
             existingCustomer.setGender(customerDto.getGender());
             existingCustomer.setEmail(customerDto.getEmail());
             existingCustomer.setPhoneNumber(customerDto.getPhoneNumber());
-            existingCustomer.setRole(customerDto.getRole());
             existingCustomer.setPassword(customerDto.getPassword());
 
             // Save the updated customer entity back to the database
