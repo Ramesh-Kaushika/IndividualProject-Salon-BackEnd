@@ -29,4 +29,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         );
         return employeeRepo.save(employee);
     }
+
+    @Override
+    public String deleteAdmin(Integer id) {
+        if (employeeRepo.existsById(id)){
+            employeeRepo.deleteById(id);
+            return "Employee Deleted";
+        }
+        return "No employee Found";
+    }
 }

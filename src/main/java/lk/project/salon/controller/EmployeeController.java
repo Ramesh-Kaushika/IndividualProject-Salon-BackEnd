@@ -24,4 +24,10 @@ public class EmployeeController {
         return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee (@PathVariable Integer id){
+        String deleted = employeeService.deleteAdmin(id);
+        return new ResponseEntity<>(deleted, HttpStatus.CREATED);
+    }
+
 }
