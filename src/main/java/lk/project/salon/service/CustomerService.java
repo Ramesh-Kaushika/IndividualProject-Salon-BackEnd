@@ -10,7 +10,6 @@ public interface CustomerService {
     public Customer saveCustomer(CustomerDto customerDto);
 
 
-
     List<Customer> getAllCustomer();
 
 

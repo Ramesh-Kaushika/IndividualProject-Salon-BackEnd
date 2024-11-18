@@ -41,8 +41,6 @@ public class CustomerController {
     }
 
 
-
-
     @GetMapping
     public ResponseEntity<Object> getAllCustomer(){
         List<Customer> allCustomer = customerService.getAllCustomer();
