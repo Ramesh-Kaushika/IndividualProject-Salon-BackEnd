@@ -17,4 +17,5 @@ public interface CustomerService {
     String login(CustomerDto customerDto);
 
 
+    String deleteCustomer(Integer id);
 }
