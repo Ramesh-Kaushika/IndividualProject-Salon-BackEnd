@@ -9,7 +9,12 @@ public interface CustomerService {
 
     public Customer saveCustomer(CustomerDto customerDto);
 
-    public Customer updateCustomer(Integer customerId,CustomerDto customerDto);
+
 
     List<Customer> getAllCustomer();
+
+
+    String login(CustomerDto customerDto);
+
+
 }

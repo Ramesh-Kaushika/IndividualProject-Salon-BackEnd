@@ -25,4 +25,5 @@ public class Customer {
     @Column(unique = true,nullable = false)
     private String password;
 
+
 }

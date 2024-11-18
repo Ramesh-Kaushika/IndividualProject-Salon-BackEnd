@@ -4,7 +4,13 @@ import lk.project.salon.dto.CustomerDto;
 import lk.project.salon.entity.Customer;
 import lk.project.salon.repo.CustomerRepo;
 import lk.project.salon.service.CustomerService;
+import lk.project.salon.service.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +20,16 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    @Autowired
+    AuthenticationManager authManager;
+
     private final CustomerRepo customerRepo;
+
+    @Autowired
+    private JWTService jwtService;
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
 
     @Autowired
     public CustomerServiceImpl(CustomerRepo customerRepo) {
@@ -23,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer saveCustomer(CustomerDto customerDto) throws IllegalArgumentException {
-        if (customerRepo.findByEmail(customerDto.getEmail()).isPresent()) {
+        if (customerRepo.findByEmail(customerDto.getEmail()) != null) {
             throw new IllegalArgumentException("Email already exists!");
         }
 
@@ -40,54 +55,29 @@ public class CustomerServiceImpl implements CustomerService {
                 customerDto.getGender(),
                 customerDto.getEmail(),
                 customerDto.getPhoneNumber(),
-                customerDto.getPassword()
+                encoder.encode(customerDto.getPassword()) //i m implement encode password
+
         );
         return customerRepo.save(customer);
     }
 
     @Override
-    public Customer updateCustomer(Integer customerId, CustomerDto customerDto) {
-        if (customerId == null) {
-            throw new IllegalArgumentException("Customer ID must not be null");
-        }
-
-        Optional<Customer> existingCustomerOpt = customerRepo.findById(customerId);
-
-        if (existingCustomerOpt.isPresent()) {
-            Customer existingCustomer = existingCustomerOpt.get();
-
-            // Check for unique constraints on email, phone number, and password
-            if (customerRepo.findByEmail(customerDto.getEmail()).isPresent() &&
-                    !existingCustomer.getEmail().equals(customerDto.getEmail())) {
-                throw new IllegalArgumentException("Email already exists!");
-            }
-
-            if (customerRepo.findByPhoneNumber(customerDto.getPhoneNumber()).isPresent() &&
-                    !existingCustomer.getPhoneNumber().equals(customerDto.getPhoneNumber())) {
-                throw new IllegalArgumentException("Phone Number already exists!");
-            }
-
-            if (customerRepo.findByPassword(customerDto.getPassword()).isPresent() &&
-                    !existingCustomer.getPassword().equals(customerDto.getPassword())) {
-                throw new IllegalArgumentException("Password already exists!");
-            }
-
-            // Update fields of the existing customer entity with the values from the DTO
-            existingCustomer.setCustomerName(customerDto.getCustomerName());
-            existingCustomer.setGender(customerDto.getGender());
-            existingCustomer.setEmail(customerDto.getEmail());
-            existingCustomer.setPhoneNumber(customerDto.getPhoneNumber());
-            existingCustomer.setPassword(customerDto.getPassword());
-
-            // Save the updated customer entity back to the database
-            return customerRepo.save(existingCustomer);
+    public String login(CustomerDto customerDto) {
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(customerDto.getEmail(),customerDto.getPassword()));
+        if (authentication.isAuthenticated()) {
+            String tokenCreate =  jwtService.generateToken(customerDto.getEmail());
+            return ("token - " + tokenCreate) ;
         } else {
-            throw new IllegalArgumentException("Customer not found!");
+            return "fail";
         }
     }
+
+
 
     @Override
     public List<Customer> getAllCustomer() {
         return customerRepo.findAll();
     }
+
+
 }

@@ -34,16 +34,14 @@ public class CustomerController {
 
     }
 
-    @PutMapping("/update/{customerId}")
-    public ResponseEntity<?> updateCustomer(@PathVariable Integer customerId, @RequestBody CustomerDto customerDto) {
-        try {
-            Customer updatedCustomer = customerService.updateCustomer(customerId,customerDto);
-            return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody CustomerDto customerDto) {
+        String token = customerService.login(customerDto);
+        return ResponseEntity.ok(token);
     }
+
+
+
 
     @GetMapping
     public ResponseEntity<Object> getAllCustomer(){
