@@ -1,4 +1,7 @@
 package lk.project.salon.repo;
 
-public interface ContactRepo {
+import lk.project.salon.entity.Contact;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ContactRepo extends JpaRepository<Contact, Integer> {
 }
