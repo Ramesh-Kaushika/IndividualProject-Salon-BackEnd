@@ -106,6 +106,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>salon-app</finalName>
 	</build>
 
 </project>
